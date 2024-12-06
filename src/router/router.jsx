@@ -1,10 +1,12 @@
+import RootLayout from "../Layout/RootLayout";
+
 const { createBrowserRouter } = require("react-router-dom");
 
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <h1>Root Layout</h1>,
+        element: <RootLayout></RootLayout>,
         errorElement: <h1>404 error page not found</h1>,
     }
 ]);

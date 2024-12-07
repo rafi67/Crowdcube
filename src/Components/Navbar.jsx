@@ -1,13 +1,19 @@
-import React from 'react';
+import { React, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../assets/user.png";
-
+import userIcon from "../assets/user.png";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
-    return (
-        <div className="navbar bg-base-100 bg-transparent">
+  const { user, logOut } = useContext(AuthContext);
+
+  return (
+    <div className="navbar bg-base-100 bg-transparent">
       <div className="navbar-start">
-      <input type="checkbox" value="light" className="toggle theme-controller" />
+        <input
+          type="checkbox"
+          value="light"
+          className="toggle theme-controller"
+        />
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -33,21 +39,29 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/donation">Donation Campaigns</Link>
+              <Link to="/campaigns">All Campaigns</Link>
             </li>
             <li>
               <Link to="/help">How to Help</Link>
             </li>
-            {/* {user && (
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
-            )} */}
+            {user && (
+                <li>
+                  <Link to="/addCampaign">Add Campaign</Link>
+                </li>
+              ) && (
+                <li>
+                  <Link to="/myCampaign">My Campaign</Link>
+                </li>
+              ) && (
+                <li>
+                  <Link to="/myDonation">My Donation</Link>
+                </li>
+              )}
           </ul>
         </div>
         <Link className="btn btn-ghost text-xl hidden md:flex" to="/">
-        <img src={logo} alt="" className="w-12" />
-        Home
+          {/* <img src={logo} alt="" className="w-12" /> */}
+          Home
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -58,24 +72,23 @@ const Navbar = () => {
           <li>
             <NavLink to="/campaigns">All Campaigns</NavLink>
           </li>
-          <li>
-            <NavLink to="/addCampaign">Add New Campaign</NavLink>
-          </li>
-          <li>
-            <NavLink to="/addCampaign">My Campaign</NavLink>
-          </li>
-          <li>
-            <NavLink to="/addCampaign">My Donation</NavLink>
-          </li>
-          {/* {user && (
-            <li>
-              <NavLink to="/dashboard">Dashboard</NavLink>
-            </li>
-          )} */}
+          {user && (
+              <li>
+                <NavLink to="/addCampaign">Add Campaign</NavLink>
+              </li>
+            ) && (
+              <li>
+                <NavLink to="/myCampaign">My Campaign</NavLink>
+              </li>
+            ) && (
+              <li>
+                <NavLink to="/myDonation">My Donation</NavLink>
+              </li>
+            )}
         </ul>
       </div>
       <div className="navbar-end flex items-center space-x-2">
-        {/* {user && user?.email ? (
+        {user && user?.email ? (
           <div className="hidden md:flex items-center space-x-2">
             <img className="w-10 rounded-full" src={user?.photoURL} alt="" />
             <p>{user.displayName}</p>
@@ -88,13 +101,18 @@ const Navbar = () => {
             Log-Out
           </button>
         ) : (
-          <Link to="login" className="btn btn-neutral">
-            Login
-          </Link>
-        )} */}
+          <>
+            <Link to="login" className="btn btn-neutral">
+              Login
+            </Link>
+            <Link to="register" className="btn btn-neutral">
+              Register
+            </Link>
+          </>
+        )}
       </div>
     </div>
-    );
+  );
 };
 
 export default Navbar;

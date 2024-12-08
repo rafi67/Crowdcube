@@ -2,6 +2,9 @@ import RootLayout from "../Layout/RootLayout";
 
 import { createBrowserRouter } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
+import Login from "../Pages/Login";
+import Home from "../Pages/Home";
+import Register from "../Pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Home</h1>,
+        element: <Home></Home>,
       },
       {
         path: "campaigns",
@@ -19,7 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <h1>Login</h1>,
+        element: <Login></Login>,
       },
       {
         path: "addCampaign",
@@ -31,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: "register",
-        element: <h1>register</h1>,
+        element: <Register></Register>,
       },
       {
         path: "myDonation",

@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 import { app } from "../firebase/firebase_init";
 import PropTypes from "prop-types";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth/cordova";
 import {
   GoogleAuthProvider,
   signInWithPopup,
   getAuth,
   sendPasswordResetEmail,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 export const AuthContext = createContext();
@@ -30,7 +32,7 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const userLoginWithLogin = () => {
+  const userLoginWithGoogle = () => {
     return signInWithPopup(auth, provider);
   };
 
@@ -47,6 +49,16 @@ const AuthProvider = ({ children }) => {
     return updateProfile(auth.currentUser, updatedData);
   };
 
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => {
+      unSubscribe();
+    };
+  }, []);
+
   const authInfo = {
     user,
     loading,
@@ -54,7 +66,7 @@ const AuthProvider = ({ children }) => {
     setLoading,
     createUser,
     userLogin,
-    userLoginWithLogin,
+    userLoginWithGoogle,
     logOut,
     resetPassword,
     updateUserProfile,

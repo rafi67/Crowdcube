@@ -68,24 +68,26 @@ const Navbar = () => {
             <NavLink to="/campaigns">All Campaigns</NavLink>
           </li>
           {user && (
-              <li>
-                <NavLink to="/addCampaign">Add Campaign</NavLink>
-              </li>
-            ) && (
-              <li>
-                <NavLink to="/myCampaign">My Campaign</NavLink>
-              </li>
-            ) && (
-              <li>
-                <NavLink to="/myDonation">My Donation</NavLink>
-              </li>
-            )}
+            <li>
+              <NavLink to="/addCampaign">Add Campaign</NavLink>
+            </li>
+          )}
+          {user && (
+            <li>
+              <NavLink to="/myCampaign">My Campaign</NavLink>
+            </li>
+          )}
+          {user && (
+            <li>
+              <NavLink to="/myDonation">My Donation</NavLink>
+            </li>
+          )}
         </ul>
       </div>
       <div className="navbar-end flex items-center space-x-2">
         {user && user?.email ? (
           <div className="hidden md:flex items-center space-x-2">
-            <img className="w-10 rounded-full" src={user?.photoURL} alt="" />
+            <img className="w-10 rounded-full" src={user.photoURL} alt="" />
             <p>{user.displayName}</p>
           </div>
         ) : (

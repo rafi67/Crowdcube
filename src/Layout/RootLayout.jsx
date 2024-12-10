@@ -28,7 +28,7 @@ const RootLayout = () => {
         <Header></Header>
       </header>
       <ToastContainer position="top-center" />
-      <main className="mx-auto w-screen">
+      <main className="mx-auto w-full">
         {loading ? <Loading></Loading> : <Outlet />}
       </main>
       <footer>

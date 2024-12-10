@@ -5,6 +5,9 @@ import PrivateRoute from "./PrivateRoute";
 import Login from "../Pages/Login";
 import Home from "../Pages/Home";
 import Register from "../Pages/Register";
+import AllCampaigns from "../Pages/AllCampaigns";
+import AddCampaign from "../Pages/AddCampaign";
+import ls from "../localStorage/localStorage";
 
 const router = createBrowserRouter([
   {
@@ -17,8 +20,9 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "campaigns",
-        element: <h1>All Campaigns</h1>,
+        path: "allCampaigns",
+        element: <AllCampaigns></AllCampaigns>,
+        loader: () => fetch("http://localhost:5000/getAllCampaigns"),
       },
       {
         path: "login",
@@ -28,7 +32,7 @@ const router = createBrowserRouter([
         path: "addCampaign",
         element: (
           <PrivateRoute>
-            <h1>Add Campaign</h1>
+            <AddCampaign></AddCampaign>
           </PrivateRoute>
         ),
       },
@@ -48,9 +52,10 @@ const router = createBrowserRouter([
         path: "myCampaign",
         element: (
           <PrivateRoute>
-            <h1>My Campaign</h1>
+            <AllCampaigns></AllCampaigns>
           </PrivateRoute>
         ),
+        loader: () => fetch(`http://localhost:5000/getMyCampaign/${ls.getEmail()}`),
       },
     ],
   },

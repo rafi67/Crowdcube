@@ -11,9 +11,10 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   getAuth,
-  sendPasswordResetEmail,
   onAuthStateChanged,
 } from "firebase/auth";
+
+import ls from '../localStorage/localStorage';
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -38,11 +39,8 @@ const AuthProvider = ({ children }) => {
 
   const logOut = () => {
     setLoading(true);
+    ls.removeEmail();
     signOut(auth);
-  };
-
-  const resetPassword = (email) => {
-    return sendPasswordResetEmail(auth, email);
   };
 
   const updateUserProfile = (updatedData) => {
@@ -51,6 +49,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      ls.setEmail(currentUser.email);
       setUser(currentUser);
       setLoading(false);
     });
@@ -68,7 +67,6 @@ const AuthProvider = ({ children }) => {
     userLogin,
     userLoginWithGoogle,
     logOut,
-    resetPassword,
     updateUserProfile,
   };
 

@@ -83,7 +83,6 @@ const Login = () => {
           </button>
           <label className="label">
             <Link
-              to="/resetPassword"
               className="label-text-alt link link-hover"
             >
               Forgot password?

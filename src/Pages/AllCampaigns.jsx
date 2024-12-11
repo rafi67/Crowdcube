@@ -1,9 +1,8 @@
 import { useLoaderData, useLocation } from "react-router-dom";
-import ls from "../localStorage/localStorage";
-import { useEffect, useState } from "react";
 
 const AllCampaigns = () => {
   const campaign = useLoaderData();
+  const { pathname } = useLocation();
 
   return (
     <div className="container mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
-import UpdateFormModal from "./UpdateFormModal";
+import { Link } from "react-router-dom";
 
 const CampaignTable = ({ user, deleteCampaign }) => {
   const {
@@ -36,12 +36,12 @@ const CampaignTable = ({ user, deleteCampaign }) => {
         <td>{deadLine}</td>
         <td>{description}</td>
         <td>
-          <button
+          <Link
             className="btn"
-            onClick={() => document.getElementById("my_modal_1").showModal()}
+            to={`/updateCampaign/${_id}`}
           >
             <MdEdit />
-          </button>
+          </Link>
         </td>
         <td>
           <button className="btn" onClick={() => deleteCampaign(_id)}>
@@ -49,7 +49,6 @@ const CampaignTable = ({ user, deleteCampaign }) => {
           </button>
         </td>
       </tr>
-      <UpdateFormModal id={_id} user={user}></UpdateFormModal>
     </>
   );
 };

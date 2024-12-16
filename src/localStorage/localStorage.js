@@ -8,7 +8,7 @@ const getEmail = () => {
 };
 
 const removeEmail = () => {
-    removeItem('email');
+    localStorage.removeItem('email');
 };
 
 

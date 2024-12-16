@@ -20,14 +20,16 @@ const RootLayout = () => {
       : pathname.charAt(1).toUpperCase() + pathname.slice(2);
 
   return (
-    <div className="min-h-screen flex flex-col font-poppins space-y-4">
-      <Helmet>
-        <title>{path}</title>
-      </Helmet>
-      <header>
-        <Header></Header>
-      </header>
-      <ToastContainer position="top-center" />
+    <div className="min-h-screen flex flex-col font-poppins justify-between space-y-4">
+      <div className="space-y-4">
+        <Helmet>
+          <title>{path}</title>
+        </Helmet>
+        <header>
+          <Header></Header>
+        </header>
+        <ToastContainer position="top-center" />
+      </div>
       <main className="mx-auto w-full">
         {loading ? <Loading></Loading> : <Outlet />}
       </main>

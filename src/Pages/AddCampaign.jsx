@@ -6,7 +6,6 @@ const AddCampaign = () => {
   const { user } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     const photo = e.target.photo.value;
     const name = e.target.name.value;
     const email = e.target.email.value;
@@ -16,8 +15,6 @@ const AddCampaign = () => {
     const amount = e.target.amount.value;
     const deadLine = e.target.deadLine.value;
 
-    console.log('dead line:', deadLine);
-    
     const campaign = {
       photo,
       title,
@@ -29,21 +26,19 @@ const AddCampaign = () => {
       deadLine,
     };
 
-    console.log(campaign);
-
-    fetch('http://localhost:5000/addCampaign', {
+    fetch("http://localhost:5000/addCampaign", {
       method: "POST",
       headers: {
-        "content-type" : "application/json",
+        "content-type": "application/json",
       },
       body: JSON.stringify(campaign),
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      toast.success('Campaign Successfully Added');
-  })
-    .catch( err => toast.error(err.message));
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("Campaign Successfully Added");
+      })
+      .catch((err) => toast.error(err.message));
     e.target.reset();
   };
 
@@ -79,14 +74,18 @@ const AddCampaign = () => {
           <label className="label">
             <span className="label-text">Campaign Type</span>
           </label>
-          <select className="select select-bordered join-item" type="text" name="type">
-            <option disabled defaultValue={'Type'}>
+          <select
+            className="select select-bordered join-item"
+            type="text"
+            name="type"
+          >
+            <option disabled defaultValue={"Type"}>
               Type
             </option>
-            <option value={'Personal Issue'}>Personal Issue</option>
-            <option value={'Startup'}>Startup</option>
-            <option value={'Business'}>Business</option>
-            <option value={'Creative Ideas'}>Creative Ideas</option>
+            <option value={"Personal Issue"}>Personal Issue</option>
+            <option value={"Startup"}>Startup</option>
+            <option value={"Business"}>Business</option>
+            <option value={"Creative Ideas"}>Creative Ideas</option>
           </select>
         </div>
         <div className="form-control">

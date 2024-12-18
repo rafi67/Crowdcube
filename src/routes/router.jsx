@@ -57,12 +57,18 @@ const router = createBrowserRouter([
             <MyCampaign></MyCampaign>
           </PrivateRoute>
         ),
-        loader: () => fetch(`http://localhost:5000/getMyCampaign/${ls.getEmail()}`),
+        loader: () =>
+          fetch(`http://localhost:5000/getMyCampaign/${ls.getEmail()}`),
       },
       {
         path: "updateCampaign/:id",
-        element: <UpdateCampaign></UpdateCampaign>,
-        loader: ({params}) => fetch(`http://localhost:5000/getCampaign/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <UpdateCampaign></UpdateCampaign>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/getCampaign/${params.id}`),
       },
     ],
   },

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useLoaderData, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 import CampaignTable from "../Components/CampaignTable";
 
@@ -23,7 +23,7 @@ const MyCampaign = () => {
       if (result.isConfirmed) {
         Swal.fire({
           title: "Deleted!",
-          text: "Your file has been deleted.",
+          text: "Campaign has been deleted.",
           icon: "success",
         });
         fetch(`http://localhost:5000/deleteCampaign/${id}`, {

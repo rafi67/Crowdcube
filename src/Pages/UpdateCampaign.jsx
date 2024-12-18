@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useLoaderData } from "react-router-dom";
 
 const UpdateCampaign = () => {
   const data = useLoaderData();
+
+  const [campaign, setCampaign] = useState(data);
 
   console.log('loaded data', data);
 
@@ -20,7 +22,7 @@ const UpdateCampaign = () => {
     const amount = e.target.amount.value;
     const deadLine = e.target.deadLine.value;
 
-    const campaign = {
+    const updatedCampaign = {
       photo,
       title,
       type,
@@ -31,17 +33,19 @@ const UpdateCampaign = () => {
       deadLine,
     };
 
-    fetch(`http://localhost:5000/updateCampaign/${data._id}`, {
+    setCampaign(updatedCampaign);
+
+    fetch(`http://localhost:5000/updateCampaign/${campaign._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(campaign),
+      body: JSON.stringify(updatedCampaign),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        toast.success("Campaign Successfully Added");
+        toast.success("Campaign Updated Successfully");
       })
       .catch((err) => toast.error(err.message));
     e.target.reset();
@@ -60,7 +64,7 @@ const UpdateCampaign = () => {
             placeholder="Photo-URL"
             name="photo"
             className="input input-bordered"
-            defaultValue={data.photo}
+            defaultValue={campaign.photo}
             required
           />
         </div>
@@ -72,7 +76,7 @@ const UpdateCampaign = () => {
             type="text"
             placeholder="Campaign Title"
             name="title"
-            defaultValue={data.title}
+            defaultValue={campaign.title}
             className="input input-bordered"
             required
           />
@@ -85,7 +89,7 @@ const UpdateCampaign = () => {
             className="select select-bordered join-item"
             type="text"
             name="type"
-            defaultValue={data.type}
+            defaultValue={campaign.type}
           >
             <option disabled value={"Type"}>
               Type
@@ -103,7 +107,7 @@ const UpdateCampaign = () => {
           <textarea
             placeholder="Description"
             name="description"
-            defaultValue={data.description}
+            defaultValue={campaign.description}
             className="textarea textarea-bordered textarea-lg w-full max-w-xs"
           ></textarea>
         </div>
@@ -115,7 +119,7 @@ const UpdateCampaign = () => {
             type="text"
             placeholder="Minimum Donation Amount"
             name="amount"
-            defaultValue={data.amount}
+            defaultValue={campaign.amount}
             className="input input-bordered"
             required
           />
@@ -128,7 +132,7 @@ const UpdateCampaign = () => {
             type="date"
             placeholder="Deadline"
             name="deadLine"
-            defaultValue={data.deadLine}
+            defaultValue={campaign.deadLine}
             className="input input-bordered w-full max-w-xs"
           />
         </div>
@@ -141,7 +145,7 @@ const UpdateCampaign = () => {
             name="email"
             placeholder="Email"
             className="input input-bordered w-full max-w-xs"
-            value={data.email}
+            value={campaign.email}
             readOnly
           />
         </div>
@@ -153,7 +157,7 @@ const UpdateCampaign = () => {
             type="email"
             name="name"
             placeholder="User Name"
-            value={data.name}
+            value={campaign.name}
             className="input input-bordered w-full max-w-xs"
             readOnly
           />

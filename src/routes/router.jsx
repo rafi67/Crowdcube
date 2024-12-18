@@ -10,6 +10,7 @@ import AddCampaign from "../Pages/AddCampaign";
 import ls from "../localStorage/localStorage";
 import MyCampaign from "../Pages/MyCampaign";
 import UpdateCampaign from "../Pages/UpdateCampaign";
+import Details from "../Pages/Details";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,13 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/getCampaign/${params.id}`),
+      },
+      {
+        path: "details/:id",
+        element: <PrivateRoute>
+          <Details></Details>
+        </PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:5000/getCampaign/${params.id}`),
       },
     ],
   },

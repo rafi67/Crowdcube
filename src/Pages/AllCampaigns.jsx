@@ -1,4 +1,4 @@
-import { useLoaderData, useLocation } from "react-router-dom";
+import { Link, useLoaderData, useLocation } from "react-router-dom";
 
 const AllCampaigns = () => {
   const campaign = useLoaderData();
@@ -20,7 +20,7 @@ const AllCampaigns = () => {
             <p>Type: {campaign.type}</p>
             <p>Minimum Amount to Donate: {campaign.amount}</p>
             <div className="card-actions justify-end">
-              <button className="btn btn-neutral">See more</button>
+              <Link className="btn btn-neutral" to={`/details/${campaign._id}`}>See more</Link>
             </div>
           </div>
         </div>

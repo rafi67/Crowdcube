@@ -1,31 +1,32 @@
-import { Link, useLoaderData, useLocation } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
+import AllCampaignTable from "../Components/AllCampaignTable";
 
 const AllCampaigns = () => {
   const campaign = useLoaderData();
-  const { pathname } = useLocation();
 
   return (
-    <div className="container mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-      {campaign.map((campaign) => (
-        <div key={campaign._id} className="card bg-base-100 shadow-xl">
-          <figure>
-            <img
-              className="w-full h-[311px]"
-              src={campaign.photo}
-              alt={campaign.title}
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">{campaign.title}</h2>
-            <p>Type: {campaign.type}</p>
-            <p>Minimum Amount to Donate: {campaign.amount}</p>
-            <div className="card-actions justify-end">
-              <Link className="btn btn-neutral" to={`/details/${campaign._id}`}>See more</Link>
-            </div>
-          </div>
+     <div className="overflow-x-auto">
+          <table className="table table-zebra">
+            {/* head */}
+            <thead>
+              <tr>
+                <th>Campaign Image</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Campaign Title</th>
+                <th>Campaign Type</th>
+                <th>Minimum Donation Amount</th>
+                <th>Deadline</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              {campaign.map(data => (
+                <AllCampaignTable key={data._id} user={data}></AllCampaignTable>
+              ))}
+            </tbody>
+          </table>
         </div>
-      ))}
-    </div>
   );
 };
 

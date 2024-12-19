@@ -2,6 +2,7 @@ import { React, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import userIcon from "../assets/user.png";
 import { AuthContext } from "../Provider/AuthProvider";
+import ls from '../localStorage/localStorage';
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -79,7 +80,7 @@ const Navbar = () => {
           )}
           {user && (
             <li>
-              <NavLink to="/myDonation">My Donation</NavLink>
+              <NavLink to='/myDonation'>My Donation</NavLink>
             </li>
           )}
         </ul>

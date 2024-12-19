@@ -11,6 +11,7 @@ import ls from "../localStorage/localStorage";
 import MyCampaign from "../Pages/MyCampaign";
 import UpdateCampaign from "../Pages/UpdateCampaign";
 import Details from "../Pages/Details";
+import MyDonation from "../Pages/MyDonation";
 
 const router = createBrowserRouter([
   {
@@ -44,22 +45,13 @@ const router = createBrowserRouter([
         element: <Register></Register>,
       },
       {
-        path: "myDonation",
-        element: (
-          <PrivateRoute>
-            <h1>My Donation</h1>
-          </PrivateRoute>
-        ),
-      },
-      {
         path: "myCampaign",
         element: (
           <PrivateRoute>
             <MyCampaign></MyCampaign>
           </PrivateRoute>
         ),
-        loader: () =>
-          fetch(`http://localhost:5000/getMyCampaign/${ls.getEmail()}`),
+        loader: () => fetch(`http://localhost:5000/getMyCampaign/${ls.getEmail()}`),
       },
       {
         path: "updateCampaign/:id",
@@ -73,10 +65,22 @@ const router = createBrowserRouter([
       },
       {
         path: "details/:id",
-        element: <PrivateRoute>
-          <Details></Details>
-        </PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/getCampaign/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <Details></Details>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/getCampaign/${params.id}`),
+      },
+      {
+        path: "myDonation",
+        element: (
+          <PrivateRoute>
+            <MyDonation></MyDonation>
+          </PrivateRoute>
+        ),
+        loader: () => fetch(`http://localhost:5000/getDonation/${ls.getEmail()}`)
       },
     ],
   },

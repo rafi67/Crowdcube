@@ -7,9 +7,6 @@ const Details = () => {
   const data = useLoaderData();
   const { user } = useContext(AuthContext);
 
-  console.log(data);
-  console.log(user.displayName, user.email);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 

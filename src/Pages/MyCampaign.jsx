@@ -7,8 +7,7 @@ const MyCampaign = () => {
 
   const loadedData = useLoaderData();
 
-  const [user, setUser] = useState([...loadedData]);
-
+  const [campaign, setCampaign] = useState([...loadedData]);
 
   const deleteCampaign = (id) => {
     Swal.fire({
@@ -32,8 +31,8 @@ const MyCampaign = () => {
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount) {
-              const remainingUser = user.filter((u) => u._id !== id);
-              setUser([...remainingUser]);
+              const remainingCampaign = user.filter((u) => u._id !== id);
+              setCampaign([...remainingCampaign]);
             }
           })
           .catch((err) => toast.error(err));
@@ -59,7 +58,7 @@ const MyCampaign = () => {
           </tr>
         </thead>
         <tbody>
-          {user.map(data => (
+          {campaign.map(data => (
             <CampaignTable key={data._id} user={data} deleteCampaign={deleteCampaign}></CampaignTable>
           ))}
         </tbody>

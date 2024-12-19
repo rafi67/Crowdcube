@@ -12,12 +12,13 @@ import MyCampaign from "../Pages/MyCampaign";
 import UpdateCampaign from "../Pages/UpdateCampaign";
 import Details from "../Pages/Details";
 import MyDonation from "../Pages/MyDonation";
+import Error from "../Pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout></RootLayout>,
-    errorElement: <h1>404 error page not found</h1>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",

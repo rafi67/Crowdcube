@@ -14,6 +14,19 @@ const Details = () => {
     const donatedId = data._id;
     const name = user.displayName;
     const email = user.email;
+    const today = new Date();
+    const date = data.deadLine;
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const day = String(today.getDate()).padStart(2, "0");
+
+    const formattedDate = `${year}-${month}-${day}`;
+    console.log(today, date);
+
+    if (date < formattedDate) {
+      toast.error("Sorry Deadline is over.");
+      return;
+    }
 
     if (donatedAmount >= data.amount) {
       const donation = {
@@ -36,9 +49,10 @@ const Details = () => {
           toast.success("Donation Successful");
         })
         .catch((err) => toast.error(err.message));
-    }
-    else {
-        toast.warning("Your donation amount doesn't meet the minimum requirements");
+    } else {
+      toast.warning(
+        "Your donation amount doesn't meet the minimum requirements"
+      );
     }
   };
 

@@ -6,8 +6,18 @@ import { FaHeart } from "react-icons/fa";
 import { FaEarthAmericas } from "react-icons/fa6";
 import { FaLightbulb } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router-dom";
+import { Cursor, Typewriter, useTypewriter } from "react-simple-typewriter";
 
 const Home = () => {
+  const [text] = useTypewriter({
+    words: [
+      "Running Campaign",
+      "See who's posting campaign",
+      "Learn how business works by connecting with people",
+    ],
+    loop: 0,
+  });
+
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -22,7 +32,8 @@ const Home = () => {
         </section>
 
         {/* Running Campaign */}
-        <section data-aos="fade-right">
+        <section data-aos="fade-right" className="space-y-4">
+          <h1 className="text-4xl font-bold">{text}<Cursor/></h1>
           <div className="container mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
             {campaign.map((campaign) => (
               <div key={campaign._id} className="card bg-base-100 shadow-xl">

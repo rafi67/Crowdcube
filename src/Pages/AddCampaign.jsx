@@ -6,6 +6,8 @@ const AddCampaign = () => {
   const { user } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
+    e.preventDefault();
+    
     const photo = e.target.photo.value;
     const name = e.target.name.value;
     const email = e.target.email.value;
@@ -34,8 +36,7 @@ const AddCampaign = () => {
       body: JSON.stringify(campaign),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         toast.success("Campaign Successfully Added");
       })
       .catch((err) => toast.error(err.message));

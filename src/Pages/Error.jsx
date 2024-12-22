@@ -1,9 +1,11 @@
 import React from 'react';
+import Lottie from 'lottie-react';
+import error from '../../NotFound.json';
 
 const Error = () => {
     return (
         <div className='container flex justify-center items-center'>
-            <img className='w-3/4 h-3/4' src="src/assets/error.jpg" alt="" />
+            <Lottie className='w-screen h-screen' animationData={error}/>
         </div>
     );
 };

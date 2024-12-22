@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
-import CampaignTable from "../Components/CampaignTable";
+import { MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 const MyCampaign = () => {
-
   const loadedData = useLoaderData();
 
   const [campaign, setCampaign] = useState([...loadedData]);
@@ -31,7 +31,7 @@ const MyCampaign = () => {
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount) {
-              const remainingCampaign = user.filter((u) => u._id !== id);
+              const remainingCampaign = campaign.filter((u) => u._id !== id);
               setCampaign([...remainingCampaign]);
             }
           })
@@ -58,8 +58,36 @@ const MyCampaign = () => {
           </tr>
         </thead>
         <tbody>
-          {campaign.map(data => (
-            <CampaignTable key={data._id} user={data} deleteCampaign={deleteCampaign}></CampaignTable>
+          {campaign.map((data) => (
+            <>
+              {/* row 1 */}
+              <tr>
+                <td>
+                  <div className="avatar">
+                    <div className="mask mask-squircle h-12 w-12">
+                      <img src={data.photo} alt="Avatar Tailwind CSS Component" />
+                    </div>
+                  </div>
+                </td>
+                <td>{data.name}</td>
+                <td>{data.email}</td>
+                <td>{data.title}</td>
+                <td>{data.type}</td>
+                <td>{data.amount}</td>
+                <td>{data.deadLine}</td>
+                <td>{data.description}</td>
+                <td>
+                  <Link className="btn" to={`/updateCampaign/${data._id}`}>
+                    <MdEdit />
+                  </Link>
+                </td>
+                <td>
+                  <button className="btn" onClick={() => deleteCampaign(data._id)}>
+                    <MdDelete />
+                  </button>
+                </td>
+              </tr>
+            </>
           ))}
         </tbody>
       </table>

@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 import Banner from "../Components/Banner";
-import about from "../assets/about.png";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { FaHeart } from "react-icons/fa";
 import { FaEarthAmericas } from "react-icons/fa6";
 import { FaLightbulb } from "react-icons/fa";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Home = () => {
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
+
+  const campaign = useLoaderData();
 
   return (
     <>
@@ -19,85 +21,31 @@ const Home = () => {
           <Banner></Banner>
         </section>
 
-        {/* about section */}
+        {/* Running Campaign */}
         <section data-aos="fade-right">
-          <div className="hero bg-base-200 min-h-screen rounded-2xl">
-            <div className="hero-content flex-col md:flex-row">
-              <img
-                src={about}
-                className="w-[90%] md:w-5/12 rounded-lg shadow-2xl"
-              />
-              <div className="md:w-7/12">
-                <h1 className="text-5xl text-center font-black md:text-justify">
-                  About
-                </h1>
-                <p className="py-6 text-justify">
-                  A crowdfunding web application serves as a digital platform
-                  that empowers individuals, creators, and entrepreneurs to
-                  raise funds for various projects, ideas, or causes. It enables
-                  users to share their vision, whether it’s a personal need like
-                  medical expenses, a creative endeavor such as a film or app,
-                  or a startup aiming to launch a groundbreaking product.
-                  Contributors from around the world can support these
-                  initiatives financially, often in exchange for rewards,
-                  equity, or simply the satisfaction of helping a cause. The
-                  platform bridges the gap between innovative thinkers and a
-                  global community of backers, fostering collaboration and
-                  support. By streamlining the fundraising process, crowdfunding
-                  applications turn aspirations into reality.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* how it works section */}
-        <section data-aos="fade-left">
-          <div className="max-w-6xl mx-auto rounded-2xl px-4 py-16 space-y-6">
-            <h1 className="font-bold text-4xl">How it Works</h1>
-            <p className="text-gray-600">
-              A crowdfunding web application works by allowing users to create
-              campaign pages that showcase their projects, set funding goals,
-              and invite people to contribute financially, often incentivizing
-              support through rewards or equity offerings.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mx-auto">
-              {/* card -1 */}
-              <div className="card bg-base-100 shadow-2xl p-6">
-                <div className="card-body items-center space-y-2">
-                  <h2 className="card-title">Donation Instructions</h2>
-                  <p className="text-justify text-gray-500">
-                    Create a Campaign
-                  </p>
-                  <div className="card-actions justify-end"></div>
+          <div className="container mx-auto grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+            {campaign.map((campaign) => (
+              <div key={campaign._id} className="card bg-base-100 shadow-xl">
+                <figure>
+                  <img
+                    className="w-full h-[311px]"
+                    src={campaign.photo}
+                    alt={campaign.title}
+                  />
+                </figure>
+                <div className="card-body text-left">
+                  <h2 className="card-title">{campaign.title}</h2>
+                  <p>Type: {campaign.type}</p>
+                  <p>Donated Amount: {campaign.amount}</p>
+                  <Link
+                    className="btn btn-neutral"
+                    to={`/details/${campaign._id}`}
+                  >
+                    See more
+                  </Link>
                 </div>
               </div>
-
-              {/* card -2 */}
-              <div className="card bg-base-100 shadow-2xl p-6">
-                <div className="card-body items-center space-y-2">
-                  <h2 className="card-title">Share with the Community</h2>
-                  <p className="text-justify text-gray-500">
-                    Spread the word through social media and email to attract
-                    backers and amplify your reach.
-                  </p>
-                  <div className="card-actions justify-end"></div>
-                </div>
-              </div>
-
-              {/* card -3 */}
-              <div className="card bg-base-100 shadow-2xl p-6">
-                <div className="card-body items-center space-y-2">
-                  <h2 className="card-title">Receive Support</h2>
-                  <p className="text-justify text-gray-500">
-                    Collect contributions from backers to reach your funding
-                    goal and bring your project to life.
-                  </p>
-                  <div className="card-actions justify-end"></div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
 
@@ -116,8 +64,10 @@ const Home = () => {
               <div className="card bg-base-100 p-6 shadow-2xl">
                 <div className="card-body items-center space-y-2 text-center">
                   <FaLightbulb className="text-2xl" />
-                  <h2 className="card-title">Spread Warmth</h2>
-                  <p>Help those in need stay warm during the coldest months.</p>
+                  <h2 className="card-title">Power Dreams</h2>
+                  <p>
+                    Support ideas and innovations that can change the world.
+                  </p>
                 </div>
               </div>
 
@@ -125,10 +75,8 @@ const Home = () => {
               <div className="card bg-base-100 p-6 shadow-2xl">
                 <div className="card-body items-center space-y-2 text-center">
                   <FaHeart className="text-2xl" />
-                  <h2 className="card-title">Reduce Waste</h2>
-                  <p>
-                    Rehome your gently used clothes and reduce landfill waste.
-                  </p>
+                  <h2 className="card-title">Be the Spark</h2>
+                  <p>Your donation ignites change and inspires success.</p>
                 </div>
               </div>
 
@@ -136,10 +84,8 @@ const Home = () => {
               <div className="card bg-base-100 p-6 shadow-2xl">
                 <div className="card-body items-center space-y-2 text-center">
                   <FaEarthAmericas className="text-2xl" />
-                  <h2 className="card-title">Empower Communities</h2>
-                  <p>
-                    Show support and foster hope within your local community.
-                  </p>
+                  <h2 className="card-title">Build Futures</h2>
+                  <p>Help creators and entrepreneurs achieve their goals.</p>
                 </div>
               </div>
             </div>

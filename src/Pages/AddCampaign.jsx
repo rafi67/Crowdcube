@@ -28,7 +28,7 @@ const AddCampaign = () => {
       deadLine,
     };
 
-    fetch("http://localhost:5000/addCampaign", {
+    fetch("https://crowd-cube-server-six.vercel.app/addCampaign", {
       method: "POST",
       headers: {
         "content-type": "application/json",

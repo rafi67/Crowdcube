@@ -25,7 +25,7 @@ const MyCampaign = () => {
           text: "Campaign has been deleted.",
           icon: "success",
         });
-        fetch(`http://localhost:5000/deleteCampaign/${id}`, {
+        fetch(`https://crowd-cube-server-six.vercel.app/deleteCampaign/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

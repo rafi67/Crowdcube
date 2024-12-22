@@ -35,7 +35,7 @@ const UpdateCampaign = () => {
 
     setCampaign(updatedCampaign);
 
-    fetch(`http://localhost:5000/updateCampaign/${campaign._id}`, {
+    fetch(`https://crowd-cube-server-six.vercel.app/${campaign._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

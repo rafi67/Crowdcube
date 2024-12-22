@@ -23,12 +23,12 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/getRunningCampaign'),
+        loader: () => fetch('https://crowd-cube-server-six.vercel.app/getRunningCampaign'),
       },
       {
         path: "allCampaigns",
         element: <AllCampaigns></AllCampaigns>,
-        loader: () => fetch("http://localhost:5000/getAllCampaigns"),
+        loader: () => fetch("https://crowd-cube-server-six.vercel.app/getAllCampaigns"),
       },
       {
         path: "login",
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
             <MyCampaign></MyCampaign>
           </PrivateRoute>
         ),
-        loader: () => fetch(`http://localhost:5000/getMyCampaign/${ls.getEmail()}`),
+        loader: () => fetch(`https://crowd-cube-server-six.vercel.app/getMyCampaign/${ls.getEmail()}`),
       },
       {
         path: "updateCampaign/:id",
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/getCampaign/${params.id}`),
+          fetch(`https://crowd-cube-server-six.vercel.app/getCampaign/${params.id}`),
       },
       {
         path: "details/:id",
@@ -73,7 +73,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/getCampaign/${params.id}`),
+          fetch(`https://crowd-cube-server-six.vercel.app/getCampaign/${params.id}`),
       },
       {
         path: "myDonation",
@@ -82,7 +82,7 @@ const router = createBrowserRouter([
             <MyDonation></MyDonation>
           </PrivateRoute>
         ),
-        loader: () => fetch(`http://localhost:5000/getDonation/${ls.getEmail()}`)
+        loader: () => fetch(`https://crowd-cube-server-six.vercel.app/getDonation/${ls.getEmail()}`)
       },
     ],
   },

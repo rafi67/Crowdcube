@@ -36,7 +36,7 @@ const Details = () => {
         donatedAmount,
       };
 
-      fetch(`http://localhost:5000/addDonation`, {
+      fetch(`https://crowd-cube-server-six.vercel.app/addDonation`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

@@ -2,7 +2,7 @@ import { React, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import userIcon from "../assets/user.png";
 import { AuthContext } from "../Provider/AuthProvider";
-import ls from '../localStorage/localStorage';
+import logo from '../assets/icons8-cube-96.png'
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -56,8 +56,10 @@ const Navbar = () => {
           </ul>
         </div>
         <Link className="btn btn-ghost text-xl hidden md:flex" to="/">
+
           {/* <img src={logo} alt="" className="w-12" /> */}
-          Home
+          <img className="w-[48px] h-[48px]" src={logo} alt="" />
+          Crowdcube
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

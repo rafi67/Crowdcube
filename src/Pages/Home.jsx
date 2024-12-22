@@ -6,7 +6,7 @@ import { FaHeart } from "react-icons/fa";
 import { FaEarthAmericas } from "react-icons/fa6";
 import { FaLightbulb } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router-dom";
-import { Cursor, Typewriter, useTypewriter } from "react-simple-typewriter";
+import { Cursor, useTypewriter } from "react-simple-typewriter";
 
 const Home = () => {
   const [text] = useTypewriter({

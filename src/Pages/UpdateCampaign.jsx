@@ -7,10 +7,9 @@ const UpdateCampaign = () => {
 
   const [campaign, setCampaign] = useState(data);
 
-  console.log('loaded data', data);
+  const url = "https://crowd-cube-server-six.vercel.app/";
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
 
     const photo = e.target.photo.value;
@@ -33,9 +32,12 @@ const UpdateCampaign = () => {
       deadLine,
     };
 
+    console.log(updatedCampaign);
+    console.log("id", campaign._id);
+
     setCampaign(updatedCampaign);
 
-    fetch(`https://crowd-cube-server-six.vercel.app/${campaign._id}`, {
+    fetch(`${url}updateCampaign/${campaign._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

@@ -14,6 +14,8 @@ import Details from "../Pages/Details";
 import MyDonation from "../Pages/MyDonation";
 import Error from "../Pages/Error";
 
+const url = 'https://crowd-cube-server-six.vercel.app/';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,12 +25,12 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch('https://crowd-cube-server-six.vercel.app/getRunningCampaign'),
+        loader: () => fetch(`${url}getRunningCampaign`),
       },
       {
         path: "allCampaigns",
         element: <AllCampaigns></AllCampaigns>,
-        loader: () => fetch("https://crowd-cube-server-six.vercel.app/getAllCampaigns"),
+        loader: () => fetch(`${url}getAllCampaigns`),
       },
       {
         path: "login",
@@ -53,7 +55,7 @@ const router = createBrowserRouter([
             <MyCampaign></MyCampaign>
           </PrivateRoute>
         ),
-        loader: () => fetch(`https://crowd-cube-server-six.vercel.app/getMyCampaign/${ls.getEmail()}`),
+        loader: () => fetch(`${url}getMyCampaign/${ls.getEmail()}`),
       },
       {
         path: "updateCampaign/:id",
@@ -63,7 +65,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://crowd-cube-server-six.vercel.app/getCampaign/${params.id}`),
+          fetch(`${url}getCampaign/${params.id}`),
       },
       {
         path: "details/:id",
@@ -73,7 +75,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://crowd-cube-server-six.vercel.app/getCampaign/${params.id}`),
+          fetch(`${url}getCampaign/${params.id}`),
       },
       {
         path: "myDonation",
@@ -82,7 +84,7 @@ const router = createBrowserRouter([
             <MyDonation></MyDonation>
           </PrivateRoute>
         ),
-        loader: () => fetch(`https://crowd-cube-server-six.vercel.app/getDonation/${ls.getEmail()}`)
+        loader: () => fetch(`${url}getDonation/${ls.getEmail()}`),
       },
     ],
   },
